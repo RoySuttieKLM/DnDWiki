@@ -14,6 +14,9 @@ import com.example.dndwiki.home.HomeViewModel
 
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
+
+    //dit moet weg
+
     val spells = listOf(
         Spell("1 action",
             "Wizard, Sorcerer",
