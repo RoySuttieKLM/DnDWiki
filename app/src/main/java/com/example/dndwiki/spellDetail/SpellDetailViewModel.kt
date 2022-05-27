@@ -2,6 +2,6 @@ package com.example.dndwiki.spellDetail
 
 import androidx.lifecycle.ViewModel
 
-class SpellDetailViewModel: ViewModel() {
+class SpellDetailViewModel : ViewModel() {
 
 }

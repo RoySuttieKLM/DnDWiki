@@ -4,23 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.dndwiki.R
 import com.example.dndwiki.adapter.RecyclerAdapter
-import com.example.dndwiki.data.Spell
-import com.example.dndwiki.databinding.RecyclerItemBinding
 import com.example.dndwiki.databinding.SpellFinderFragmentBinding
-import com.example.dndwiki.home.HomeFragment
-import com.example.dndwiki.network.FakeNetwork
 
-class SpellFinderFragment: Fragment() {
+class SpellFinderFragment : Fragment() {
 
-
-    private var layoutManager: RecyclerView.LayoutManager? = null
     private val myAdapter = RecyclerAdapter()
 
     lateinit var binding: SpellFinderFragmentBinding
@@ -29,15 +21,11 @@ class SpellFinderFragment: Fragment() {
         ViewModelProvider(this).get(SpellFinderViewModel::class.java)
     }
 
-    companion object {
-        fun newInstance() = SpellFinderFragment()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = SpellFinderFragmentBinding.inflate(inflater)
 
@@ -55,10 +43,25 @@ class SpellFinderFragment: Fragment() {
 
         }
 
-        viewModel.spellsList.observe(viewLifecycleOwner, Observer { spells ->
-            myAdapter.setSpells(spells)
+        viewModel.spellsList.observe(viewLifecycleOwner) { spells ->
+            myAdapter.setList(spells)
+        }
+
+        viewModel.onViewReady()
+
+
+
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                viewModel.onSearchQueryInput(p0)
+                return true
+            }
+
         })
-        viewModel.getSpells()
 
     }
 

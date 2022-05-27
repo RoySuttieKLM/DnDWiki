@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.navigateToSpellFinder.observe(viewLifecycleOwner,
-            Observer<Boolean>  { shouldNavigate ->
+            Observer<Boolean> { shouldNavigate ->
                 if (shouldNavigate == true) {
                     val navController = binding.root.findNavController()
                     navController.navigate(R.id.action_homeFragment_to_spellFinderFragment)
