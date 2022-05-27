@@ -1,19 +1,13 @@
 package com.example.dndwiki
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.dndwiki.adapter.RecyclerAdapter
-import com.example.dndwiki.databinding.ActivityMainBinding as ActivityMainBinding
+import com.example.dndwiki.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
     }
 
-    override fun onSupportNavigateUp()
-            = navigateUp(findNavController(R.id.nav_host_fragment), binding.drawerLayout)
+    override fun onSupportNavigateUp() =
+        navigateUp(findNavController(R.id.nav_host_fragment), binding.drawerLayout)
 
     private fun setupNavigation() {
         val navController = findNavController(R.id.nav_host_fragment)

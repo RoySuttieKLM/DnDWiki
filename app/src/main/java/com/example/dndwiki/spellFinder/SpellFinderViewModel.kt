@@ -9,15 +9,30 @@ import com.example.dndwiki.network.FakeNetwork
 
 class SpellFinderViewModel : ViewModel() {
 
+    private val fakeNetwork = FakeNetwork()
+
     private val _spellsList = MutableLiveData<List<Spell>>()
     val spellsList: LiveData<List<Spell>>
         get() = _spellsList
 
-    fun getSpells() {
-        val fakeNetwork = FakeNetwork()
+    fun onViewReady() {
         val spells = fakeNetwork.getSpells()
 
         _spellsList.value = spells
+    }
+
+    fun onSearchQueryInput(query: String?) {
+
+        val spellsList: List<Spell> = fakeNetwork.getSpells()
+
+        if (query != null) {
+            _spellsList.value = spellsList.filter { mySpell ->
+                mySpell.name.contains(query, ignoreCase = true)
+            }
+        } else {
+            _spellsList.value = spellsList
+        }
+
     }
 
 }
