@@ -1,7 +1,7 @@
 package com.example.dndwiki.adapter
 
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dndwiki.R
 import com.example.dndwiki.data.Spell
 
-class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     private var data: List<Spell> = emptyList()
 
-    fun setSpells(list: List<Spell>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setList(list: List<Spell>) {
 
         data = list
 
-         notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
@@ -36,7 +37,7 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         holder.bind(data[i])
     }
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val itemSpellName: TextView = itemView.findViewById(R.id.item_spell_name)
 
         fun bind(spell: Spell) {
