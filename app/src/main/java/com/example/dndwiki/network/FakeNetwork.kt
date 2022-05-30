@@ -4,7 +4,7 @@ import com.example.dndwiki.data.Spell
 
 class FakeNetwork {
 
-    private var spells = listOf(
+    val spells = listOf(
         Spell("1 action",
             "Wizard, Sorcerer",
             "Acid",
@@ -53,10 +53,5 @@ class FakeNetwork {
             "/api/spells/poison-spray",
             "You extend your hand toward a creature you can see within range and project a puff of noxious gas from your palm. The creature must succeed on a constitution saving throw or take 1d12 poison damage."
         ))
-
-    fun getSpells(): List<Spell> {
-
-        return spells
-    }
 
 }

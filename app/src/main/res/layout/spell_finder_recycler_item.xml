@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_spell_name"
     android:layout_margin="@dimen/small_padding"
-    app:cardBackgroundColor="@color/pinkish"
+    app:cardBackgroundColor="@color/recycler_view_background"
     app:cardCornerRadius="@dimen/regular_padding"
     app:cardElevation="@dimen/half_padding"
     app:contentPadding="@dimen/half_padding">

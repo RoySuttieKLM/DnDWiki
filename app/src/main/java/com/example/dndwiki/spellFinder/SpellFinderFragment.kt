@@ -44,6 +44,7 @@ class SpellFinderFragment : Fragment() {
         viewModel.spellsList.observe(viewLifecycleOwner) { spells ->
             myAdapter.setSpells(spells)
         }
+
         viewModel.onViewReady()
 
         binding.spellFinderSearchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -51,13 +52,10 @@ class SpellFinderFragment : Fragment() {
                 return false
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
-                viewModel.onSearchQueryInput(p0)
+            override fun onQueryTextChange(query: String?): Boolean {
+                viewModel.onSearchQueryInput(query)
                 return true
             }
-
         })
-
     }
-
 }

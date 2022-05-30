@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -32,12 +30,8 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.d20Button.setOnClickListener {
-            viewModel.onD20Clicked()
-        }
-
         binding.homeFragmentCardView.setOnClickListener {
-            viewModel.onD20Clicked()
+            viewModel.onNavigateToSpellFinder()
         }
 
         return binding.root
