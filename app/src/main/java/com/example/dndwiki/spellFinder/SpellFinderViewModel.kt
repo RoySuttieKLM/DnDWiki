@@ -16,25 +16,23 @@ class SpellFinderViewModel : ViewModel() {
         get() = _spellsList
 
     fun onViewReady() {
-        val spells = fakeNetwork.getSpells()
+        val spells = fakeNetwork.spells
 
         _spellsList.value = spells
     }
 
     fun onSearchQueryInput(query: String?) {
 
-        val spellsList: List<Spell> = fakeNetwork.getSpells()
+        val temporaryList: List<Spell> = fakeNetwork.spells
 
-        if (query != null) {
-            _spellsList.value = spellsList.filter { mySpell ->
+        if (!query.isNullOrEmpty()) {
+            _spellsList.value = temporaryList.filter { mySpell ->
                 mySpell.name.contains(query, ignoreCase = true)
             }
         } else {
-            _spellsList.value = spellsList
+            _spellsList.value = temporaryList
         }
-
     }
-
 }
 
 

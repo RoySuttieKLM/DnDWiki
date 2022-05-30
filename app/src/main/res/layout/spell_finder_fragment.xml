@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.example.dndwiki.spellFinder.SpellFinderViewModel" />
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,28 +14,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical" >
 
                 <SearchView
-                    android:id="@+id/search_bar"
+                    android:id="@+id/spell_finder_search_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/searchview_background"
-                    android:iconifiedByDefault="false"
-                    android:queryBackground="@android:color/transparent"
-                    android:queryHint="@string/enter_spellname" />
+                    android:layout_height="match_parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
+                    android:id="@+id/spell_finder_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/small_padding"
                     android:clipToPadding="false"
-                    android:padding="8dp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    tools:listitem="@layout/recycler_item" />
+                    tools:listitem="@layout/spell_finder_recycler_item"/>
 
             </LinearLayout>
         </ScrollView>

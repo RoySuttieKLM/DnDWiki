@@ -1,7 +1,6 @@
-package com.example.dndwiki.adapter
+package com.example.dndwiki.recycler_adapter
 
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +13,16 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     private var data: List<Spell> = emptyList()
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<Spell>) {
+    fun setSpells(list: List<Spell>) {
 
         data = list
 
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.recycler_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v = LayoutInflater.from(parent.context)
+            .inflate(R.layout.spell_finder_recycler_item, parent, false)
 
         return ViewHolder(v)
     }
@@ -32,7 +31,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         return data.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, i: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, i: Int) {
 
         holder.bind(data[i])
     }

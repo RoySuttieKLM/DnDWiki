@@ -10,7 +10,7 @@ class HomeViewModel : ViewModel() {
     val navigateToSpellFinder: LiveData<Boolean>
         get() = getNavigateToSpellFinder
 
-    fun onD20Clicked() {
+    fun onNavigateToSpellFinder() {
         getNavigateToSpellFinder.value = true
     }
 
