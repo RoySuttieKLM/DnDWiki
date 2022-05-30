@@ -2,12 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data>
 
-        <variable
-            name="viewModel"
-            type="com.example.dndwiki.spellFinder.SpellFinderViewModel" />
-    </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -22,18 +17,18 @@
                 android:orientation="vertical" >
 
                 <SearchView
-                    android:id="@+id/search_bar"
+                    android:id="@+id/spell_finder_search_bar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
+                    android:id="@+id/spell_finder_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
+                    android:padding="@dimen/small_padding"
                     android:clipToPadding="false"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    tools:listitem="@layout/recycler_item"/>
+                    tools:listitem="@layout/spell_finder_recycler_item"/>
 
             </LinearLayout>
         </ScrollView>

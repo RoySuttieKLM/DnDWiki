@@ -4,44 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.dndwiki.R
-import com.example.dndwiki.adapter.RecyclerAdapter
-import com.example.dndwiki.data.Spell
-import com.example.dndwiki.databinding.RecyclerItemBinding
 import com.example.dndwiki.databinding.SpellFinderFragmentBinding
-import com.example.dndwiki.home.HomeFragment
-import com.example.dndwiki.network.FakeNetwork
+import com.example.dndwiki.recycler_adapter.RecyclerAdapter
 
-class SpellFinderFragment: Fragment() {
+class SpellFinderFragment : Fragment() {
 
-
-    private var layoutManager: RecyclerView.LayoutManager? = null
     private val myAdapter = RecyclerAdapter()
 
-    lateinit var binding: SpellFinderFragmentBinding
+    private lateinit var binding: SpellFinderFragmentBinding
 
     private val viewModel: SpellFinderViewModel by lazy {
         ViewModelProvider(this).get(SpellFinderViewModel::class.java)
     }
 
-    companion object {
-        fun newInstance() = SpellFinderFragment()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?,
+    ): View {
 
         binding = SpellFinderFragmentBinding.inflate(inflater)
-
-        binding.viewModel = viewModel
 
         return binding.root
     }
@@ -49,16 +35,28 @@ class SpellFinderFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerView.apply {
+        binding.spellFinderRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = myAdapter
 
         }
 
-        viewModel.spellsList.observe(viewLifecycleOwner, Observer { spells ->
+        viewModel.spellsList.observe(viewLifecycleOwner) { spells ->
             myAdapter.setSpells(spells)
+        }
+        viewModel.onViewReady()
+
+        binding.spellFinderSearchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                viewModel.onSearchQueryInput(p0)
+                return true
+            }
+
         })
-        viewModel.getSpells()
 
     }
 
