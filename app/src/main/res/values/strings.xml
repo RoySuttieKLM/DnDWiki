@@ -3,14 +3,15 @@
     <string name="spell_finder">Search spells!</string>
     <string name="enter_spellname">Enter spell name</string>
 
-    <string name="level">Level</string>
-    <string name="casting_time">Casting Time</string>
-    <string name="duration">Duration</string>
-    <string name="damage_type">Type of Damage</string>
-    <string name="school">School</string>
-    <string name="dnd_classes">Classe</string>
-    <string name="description">Description</string>
-    <string name="homefragment_home">Home</string>
-    <string name="spell_finder_find_spell">Find Spells</string>
-    <string name="spell_detail_details">Details</string>
+    <string name="title_level">Level</string>
+    <string name="title_casting_time">Casting Time</string>
+    <string name="title_duration">Duration</string>
+    <string name="title_damage_type">Type of Damage</string>
+    <string name="title_school">School</string>
+    <string name="title_dnd_classes">Classe</string>
+    <string name="title_description">Description</string>
+
+    <string name="title_home_fragment">Home</string>
+    <string name="title_spell_finder_fragment">Find Spells</string>
+    <string name="title_spell_detail_fragment">Details</string>
 </resources>

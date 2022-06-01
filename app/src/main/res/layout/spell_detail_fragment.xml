@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,20 +15,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="196dp" />
+        app:layout_constraintGuide_begin="176dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/spell_name_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/recycler_view_background"
+        app:cardCornerRadius="@dimen/regular_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/recycler_view_background"
-        app:cardCornerRadius="@dimen/regular_padding">
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:id="@+id/spell_name_text_view"
-            style="@style/bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -34,75 +37,69 @@
             android:textSize="@dimen/regular_font_size"
             tools:text="Acid Arrow" />
     </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/level_title"
-        style="@style/bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/regular_padding"
-        android:text="@string/level"
+        android:text="@string/title_level"
         android:textColor="@color/title_text_color"
         android:textSize="@dimen/regular_font_size"
-        app:layout_constraintBottom_toTopOf="@+id/duration_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spell_name_card_view" />
 
     <TextView
         android:id="@+id/casting_time_title"
-        style="@style/bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/regular_padding"
-        android:text="@string/casting_time"
+        android:text="@string/title_casting_time"
         android:textColor="@color/title_text_color"
         android:textSize="@dimen/regular_font_size"
-        app:layout_constraintBottom_toTopOf="@+id/damage_type_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/duration_title" />
-
-    <TextView
-        android:id="@+id/duration_title"
-        style="@style/bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/regular_padding"
-        android:text="@string/duration"
-        android:textColor="@color/title_text_color"
-        android:textSize="@dimen/regular_font_size"
-        app:layout_constraintBottom_toTopOf="@+id/casting_time_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/level_title" />
 
     <TextView
-        android:id="@+id/damage_type_title"
-        style="@style/bold"
+        android:id="@+id/duration_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/regular_padding"
-        android:text="@string/damage_type"
+        android:paddingBottom="@dimen/large_padding"
+        android:text="@string/title_duration"
         android:textColor="@color/title_text_color"
         android:textSize="@dimen/regular_font_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/casting_time_title" />
 
     <TextView
+        android:id="@+id/damage_type_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_padding"
+        android:paddingBottom="@dimen/regular_padding"
+        android:text="@string/title_damage_type"
+        android:textColor="@color/title_text_color"
+        android:textSize="@dimen/regular_font_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/duration_title" />
+
+    <TextView
         android:id="@+id/school_title"
-        style="@style/bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/regular_padding"
-        android:text="@string/school"
+        android:text="@string/title_school"
         android:textColor="@color/title_text_color"
         android:textSize="@dimen/regular_font_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/damage_type_title" />
 
     <TextView
-        android:id="@+id/dnd_classe_title"
+        android:id="@+id/dnd_clazz_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/regular_padding"
-        android:text="@string/dnd_classes"
+        android:text="@string/title_dnd_classes"
         android:textColor="@color/title_text_color"
         android:textSize="@dimen/regular_font_size"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,15 +107,15 @@
 
     <TextView
         android:id="@+id/description_title"
-        style="@style/bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_padding"
         android:paddingBottom="@dimen/regular_padding"
-        android:text="@string/description"
+        android:text="@string/title_description"
         android:textColor="@color/title_text_color"
         android:textSize="@dimen/regular_font_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dnd_classe_title" />
+        app:layout_constraintTop_toBottomOf="@id/dnd_clazz_title" />
 
     <TextView
         android:id="@+id/damage_type_text_view"
@@ -126,8 +123,8 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/regular_padding"
         android:textSize="@dimen/regular_font_size"
+        app:layout_constraintBaseline_toBaselineOf="@+id/damage_type_title"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/duration_text_view"
         tools:text="Acid" />
 
     <TextView
@@ -142,23 +139,26 @@
 
     <TextView
         android:id="@+id/duration_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/regular_padding"
+        android:maxLines="2"
+        android:paddingBottom="@dimen/large_padding"
         android:textSize="@dimen/regular_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/casting_time_text_view"
-        tools:text="Instantaneous" />
+        tools:text="Instantaneous,\n1 minute" />
 
     <TextView
         android:id="@+id/casting_time_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/regular_padding"
         android:textSize="@dimen/regular_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/level_text_view"
-        tools:text="1 action"/>
+        tools:text="1 action" />
 
     <TextView
         android:id="@+id/school_text_view"
@@ -168,28 +168,28 @@
         android:textSize="@dimen/regular_font_size"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@id/damage_type_text_view"
-        tools:text="Evocation"/>
+        tools:text="Evocation" />
+
     <TextView
         android:id="@+id/dnd_classe_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:maxLines="2"
         android:paddingBottom="@dimen/regular_padding"
         android:textSize="@dimen/regular_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@id/school_text_view"
-        tools:text="Wizard"/>
+        tools:text="Wizard, Bard, Warlock, Sorcerer" />
 
-    <ScrollView
+    <TextView
+        android:id="@+id/description_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/description_title">
-        <TextView
-            android:id="@+id/description_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/regular_padding"
-            android:textSize="@dimen/regular_font_size"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn."/>
-    </ScrollView>
+        android:paddingBottom="@dimen/regular_padding"
+        app:layout_constraintTop_toBottomOf="@id/description_title"
+        android:textSize="@dimen/regular_font_size"
+        tools:text="A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn." />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

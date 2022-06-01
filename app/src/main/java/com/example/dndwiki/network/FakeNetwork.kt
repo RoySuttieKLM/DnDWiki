@@ -63,6 +63,19 @@ class FakeNetwork {
             "Conjuration",
             "/api/spells/poison-spray",
             "You extend your hand toward a creature you can see within range and project a puff of noxious gas from your palm. The creature must succeed on a constitution saving throw or take 1d12 poison damage."
-        ))
+        ),
 
+        Spell(
+            "1 action",
+            "Bard, Sorcerer, Warlock, Wizard",
+            "Slashing",
+            "Concentration,\n 1 min.",
+            "cloud-of-daggers",
+            2,
+            "Cloud of Daggers",
+            "Conjuration",
+            "/api/spells/cloud-of-daggers",
+            "You fill the air with spinning daggers in a cube 5 feet on each side, centered on a point you choose within range. A creature takes 4d4 slashing damage when it enters the spell’s area for the first time on a turn or starts its turn there."
+        )
+    )
 }
