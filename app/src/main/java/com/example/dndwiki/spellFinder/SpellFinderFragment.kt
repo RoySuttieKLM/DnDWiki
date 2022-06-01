@@ -7,13 +7,18 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dndwiki.R
+import com.example.dndwiki.data.Spell
 import com.example.dndwiki.databinding.SpellFinderFragmentBinding
 import com.example.dndwiki.recycler_adapter.RecyclerAdapter
 
-class SpellFinderFragment : Fragment() {
+class SpellFinderFragment: Fragment() {
 
-    private val myAdapter = RecyclerAdapter()
+    private val myAdapter = RecyclerAdapter {
+        navigateToSpellDetails(it)
+    }
 
     private lateinit var binding: SpellFinderFragmentBinding
 
@@ -32,9 +37,14 @@ class SpellFinderFragment : Fragment() {
         return binding.root
     }
 
+    private fun navigateToSpellDetails(spell: Spell) {
+        val navController = binding.root.findNavController()
+        val action = SpellFinderFragmentDirections.actionSpellFinderFragmentToSpellDetailFragment(spell)
+        navController.navigate(action)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.spellFinderRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = myAdapter

@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.dndwiki.home.HomeFragment"
-        android:label="Home" >
+        android:label="@string/homefragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_spellFinderFragment"
             app:destination="@id/spellFinderFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/spellFinderFragment"
         android:name="com.example.dndwiki.spellFinder.SpellFinderFragment"
-        android:label="Find Spells" >
+        android:label="@string/spell_finder_find_spell" >
         <action
             android:id="@+id/action_spellFinderFragment_to_spellDetailFragment"
             app:destination="@id/spellDetailFragment" />
@@ -23,5 +23,9 @@
     <fragment
         android:id="@+id/spellDetailFragment"
         android:name="com.example.dndwiki.spellDetail.SpellDetailFragment"
-        android:label="Details" />
+        android:label="@string/spell_detail_details" >
+        <argument
+            android:name="spell"
+            app:argType="com.example.dndwiki.data.Spell" />
+    </fragment>
 </navigation>
