@@ -9,6 +9,11 @@ import com.example.dndwiki.network.FakeNetwork
 
 class SpellFinderViewModel : ViewModel() {
 
+
+//    private val getNavigateToSpellDetail = MutableLiveData<Boolean>()
+//    val navigateToSpellDetail: LiveData<Boolean>
+//        get() = getNavigateToSpellDetail
+
     private val fakeNetwork = FakeNetwork()
 
     private val _spellsList = MutableLiveData<List<Spell>>()
@@ -33,6 +38,7 @@ class SpellFinderViewModel : ViewModel() {
             _spellsList.value = temporaryList
         }
     }
+
 }
 
 

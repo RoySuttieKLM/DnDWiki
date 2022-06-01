@@ -1,6 +1,5 @@
 package com.example.dndwiki.recycler_adapter
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dndwiki.R
 import com.example.dndwiki.data.Spell
 
-class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter(
+    val onClick: (spell: Spell) -> Unit,
+) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     private var data: List<Spell> = emptyList()
+
+    private lateinit var item: Spell
 
     fun setSpells(list: List<Spell>) {
 
@@ -32,8 +35,11 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, i: Int) {
-
         holder.bind(data[i])
+
+        holder.itemView.setOnClickListener {
+            onClick(data[i])
+        }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,7 +48,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         fun bind(spell: Spell) {
             itemSpellName.text = spell.name
         }
-
     }
+
 
 }
