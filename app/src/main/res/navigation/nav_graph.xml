@@ -25,7 +25,7 @@
         android:name="com.example.dndwiki.spellDetail.SpellDetailFragment"
         android:label="@string/title_spell_detail_fragment" >
         <argument
-            android:name="spell"
-            app:argType="com.example.dndwiki.data.Spell" />
+            android:name="spell_index"
+            app:argType="string" />
     </fragment>
 </navigation>

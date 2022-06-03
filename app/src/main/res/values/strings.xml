@@ -14,4 +14,5 @@
     <string name="title_home_fragment">Home</string>
     <string name="title_spell_finder_fragment">Find Spells</string>
     <string name="title_spell_detail_fragment">Details</string>
+    <string name="none">none</string>
 </resources>

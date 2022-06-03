@@ -3,8 +3,12 @@ package com.example.dndwiki.spellFinder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dndwiki.data.Spell
-import com.example.dndwiki.network.FakeNetwork
+import androidx.lifecycle.viewModelScope
+import com.example.dndwiki.data.Spells
+import com.example.dndwiki.data.SpellsEnvelope
+import com.example.dndwiki.network.RetroFitHelper
+import com.example.dndwiki.network.SpellsAPI
+import kotlinx.coroutines.launch
 
 
 class SpellFinderViewModel : ViewModel() {
@@ -14,21 +18,26 @@ class SpellFinderViewModel : ViewModel() {
 //    val navigateToSpellDetail: LiveData<Boolean>
 //        get() = getNavigateToSpellDetail
 
-    private val fakeNetwork = FakeNetwork()
-
-    private val _spellsList = MutableLiveData<List<Spell>>()
-    val spellsList: LiveData<List<Spell>>
+    private val _spellsList = MutableLiveData<List<Spells>>()
+    val spellsList: LiveData<List<Spells>>
         get() = _spellsList
 
     fun onViewReady() {
-        val spells = fakeNetwork.spells
 
-        _spellsList.value = spells
+
+        val apiSpells: SpellsAPI = RetroFitHelper.getSpellsApi()
+
+        viewModelScope.launch {
+            val evenlope: SpellsEnvelope = apiSpells.getSpells()
+            val spells = evenlope.spells
+            _spellsList.value = spells
+        }
+
     }
 
     fun onSearchQueryInput(query: String?) {
 
-        val temporaryList: List<Spell> = fakeNetwork.spells
+        val temporaryList: List<Spells> = _spellsList.value!!
 
         if (!query.isNullOrEmpty()) {
             _spellsList.value = temporaryList.filter { mySpell ->
