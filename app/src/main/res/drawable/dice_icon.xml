@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/rounded_corners_dice_frame">
+
+    </item>
+    <item
+        android:drawable="@drawable/dice_svg">
+
+    </item>
+</layer-list>
