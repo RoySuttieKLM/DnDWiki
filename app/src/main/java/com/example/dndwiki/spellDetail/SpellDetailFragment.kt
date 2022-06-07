@@ -24,6 +24,11 @@ class SpellDetailFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = SpellDetailFragmentBinding.inflate(inflater)
+
+        val swipeRefreshLayout = binding.spellDetailSwipeLayout
+        swipeRefreshLayout.isRefreshing = true
+
+        binding.spellDetailScrollView.visibility = View.GONE
         val args: SpellDetailFragmentArgs by navArgs()
 
         viewModel.onFragmentReady(args.spellIndex)
@@ -33,7 +38,16 @@ class SpellDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val swipeRefreshLayout = binding.spellDetailSwipeLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            bindData()
+        }
 
+        bindData()
+    }
+
+    private fun bindData(){
+        val swipeRefreshLayout = binding.spellDetailSwipeLayout
         viewModel.spellDetails.observe(viewLifecycleOwner) { spellDetails ->
             binding.spellNameTextView.text = spellDetails.name
 
@@ -49,7 +63,8 @@ class SpellDetailFragment : Fragment() {
             binding.dndClasseTextView.text = spellDetails.classes[0].name.orEmpty()
             binding.descriptionTextView.text = spellDetails.desc[0]
 
-
+            swipeRefreshLayout.isRefreshing = false
+            binding.spellDetailScrollView.visibility = View.VISIBLE
         }
     }
 }

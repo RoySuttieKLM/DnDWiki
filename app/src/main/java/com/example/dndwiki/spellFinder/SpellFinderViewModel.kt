@@ -13,11 +13,6 @@ import kotlinx.coroutines.launch
 
 class SpellFinderViewModel : ViewModel() {
 
-
-//    private val getNavigateToSpellDetail = MutableLiveData<Boolean>()
-//    val navigateToSpellDetail: LiveData<Boolean>
-//        get() = getNavigateToSpellDetail
-
     private val _spellsList = MutableLiveData<List<Spells>>()
     val spellsList: LiveData<List<Spells>>
         get() = _spellsList
@@ -28,12 +23,23 @@ class SpellFinderViewModel : ViewModel() {
         val apiSpells: SpellsAPI = RetroFitHelper.getSpellsApi()
 
         viewModelScope.launch {
-            val evenlope: SpellsEnvelope = apiSpells.getSpells()
-            val spells = evenlope.spells
+            val envelope: SpellsEnvelope = apiSpells.getSpells()
+            val spells = envelope.spells
             _spellsList.value = spells
         }
-
     }
+
+    fun onDataLoading() {
+
+        val apiSpells: SpellsAPI = RetroFitHelper.getSpellsApi()
+
+        viewModelScope.launch {
+            val envelope: SpellsEnvelope = apiSpells.getSpells()
+            val spells = envelope.spells
+            _spellsList.value = spells
+        }
+    }
+
 
     fun onSearchQueryInput(query: String?) {
 
