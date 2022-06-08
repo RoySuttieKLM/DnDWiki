@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 class SpellDetailFragment : Fragment() {
 
     private lateinit var binding: SpellDetailFragmentBinding
+    val args: SpellDetailFragmentArgs by navArgs()
 
     private val viewModel: SpellDetailViewModel by lazy {
         ViewModelProvider(this).get(SpellDetailViewModel::class.java)
@@ -26,9 +27,15 @@ class SpellDetailFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = SpellDetailFragmentBinding.inflate(inflater)
-        val args: SpellDetailFragmentArgs by navArgs()
+
+        val swipeRefreshLayout = binding.spellDetailSwipeLayout
+        swipeRefreshLayout.isRefreshing = true
+
+        binding.spellDetailScrollView.visibility = View.GONE
 
         viewModel.onFragmentReady(args.spellIndex)
+
+        swipeRefreshLayout.isRefreshing = false
 
         return binding.root
     }
@@ -36,6 +43,18 @@ class SpellDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val swipeRefreshLayout = binding.spellDetailSwipeLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onFragmentReady(args.spellIndex)
+
+            swipeRefreshLayout.isRefreshing = false
+        }
+
+        bindData()
+    }
+
+    private fun bindData(){
+        val swipeRefreshLayout = binding.spellDetailSwipeLayout
         lifecycleScope.launchWhenStarted {
             viewModel.spellDetails.collectLatest { spellDetails ->
                 binding.spellNameTextView.text = spellDetails.name
@@ -55,9 +74,9 @@ class SpellDetailFragment : Fragment() {
                 if (spellDetails.desc.isNotEmpty()) {
                     binding.descriptionTextView.text = spellDetails.desc[0]
                 }
+                swipeRefreshLayout.isRefreshing = false
+                binding.spellDetailScrollView.visibility = View.VISIBLE
             }
         }
-
-
     }
 }

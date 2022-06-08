@@ -18,17 +18,15 @@ class SpellFinderViewModel : ViewModel() {
     private val _spellsList = MutableStateFlow<List<Spells>>(emptyList())
     val spellsList: StateFlow<List<Spells>> = _spellsList.asStateFlow()
 
-    fun onViewReady() {
-
+    fun onDataLoading() {
 
         val apiSpells: SpellsAPI = RetroFitHelper.getSpellsApi()
 
         viewModelScope.launch {
-            val evenlope: SpellsEnvelope = apiSpells.getSpells()
-            val spells = evenlope.spells
+            val envelope: SpellsEnvelope = apiSpells.getSpells()
+            val spells = envelope.spells
             _spellsList.value = spells
         }
-
     }
 
     fun onSearchQueryInput(query: String?) {

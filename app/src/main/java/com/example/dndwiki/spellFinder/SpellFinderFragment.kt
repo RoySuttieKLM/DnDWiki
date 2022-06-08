@@ -47,19 +47,26 @@ class SpellFinderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val swipeRefreshLayout = binding.spellFinderSwipeLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onDataLoading()
+        }
+
         binding.spellFinderRecyclerView.apply {
+            swipeRefreshLayout.isRefreshing = true
             layoutManager = LinearLayoutManager(activity)
             adapter = myAdapter
-
+            viewModel.onDataLoading()
         }
 
         lifecycleScope.launchWhenStarted {
             viewModel.spellsList.collectLatest { spells ->
                 myAdapter.setSpells(spells)
+
+                swipeRefreshLayout.isRefreshing = false
             }
         }
-
-        viewModel.onViewReady()
 
         binding.spellFinderSearchBar.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
