@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dndwiki.data.Spells
 import com.example.dndwiki.databinding.SpellFinderFragmentBinding
 import com.example.dndwiki.recycler_adapter.RecyclerAdapter
+import kotlinx.coroutines.flow.collectLatest
 
 class SpellFinderFragment : Fragment() {
 
@@ -58,11 +60,11 @@ class SpellFinderFragment : Fragment() {
             viewModel.onDataLoading()
         }
 
-        viewModel.spellsList.observe(viewLifecycleOwner) { spells ->
-            myAdapter.setSpells(spells)
-            swipeRefreshLayout.isRefreshing = false
+        lifecycleScope.launchWhenStarted {
+            viewModel.spellsList.collectLatest { spells ->
+                myAdapter.setSpells(spells)
+            }
         }
-
 
         binding.spellFinderSearchBar.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
