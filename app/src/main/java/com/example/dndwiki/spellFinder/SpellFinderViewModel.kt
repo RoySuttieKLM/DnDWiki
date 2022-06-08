@@ -17,18 +17,6 @@ class SpellFinderViewModel : ViewModel() {
     val spellsList: LiveData<List<Spells>>
         get() = _spellsList
 
-    fun onViewReady() {
-
-
-        val apiSpells: SpellsAPI = RetroFitHelper.getSpellsApi()
-
-        viewModelScope.launch {
-            val envelope: SpellsEnvelope = apiSpells.getSpells()
-            val spells = envelope.spells
-            _spellsList.value = spells
-        }
-    }
-
     fun onDataLoading() {
 
         val apiSpells: SpellsAPI = RetroFitHelper.getSpellsApi()
@@ -39,7 +27,6 @@ class SpellFinderViewModel : ViewModel() {
             _spellsList.value = spells
         }
     }
-
 
     fun onSearchQueryInput(query: String?) {
 

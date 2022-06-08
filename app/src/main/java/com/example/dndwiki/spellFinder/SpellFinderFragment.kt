@@ -55,7 +55,7 @@ class SpellFinderFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = true
             layoutManager = LinearLayoutManager(activity)
             adapter = myAdapter
-            viewModel.onViewReady()
+            viewModel.onDataLoading()
         }
 
         viewModel.spellsList.observe(viewLifecycleOwner) { spells ->

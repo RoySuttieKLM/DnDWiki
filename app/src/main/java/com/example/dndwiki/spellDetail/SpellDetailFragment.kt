@@ -13,6 +13,7 @@ import com.example.dndwiki.databinding.SpellDetailFragmentBinding
 class SpellDetailFragment : Fragment() {
 
     private lateinit var binding: SpellDetailFragmentBinding
+    val args: SpellDetailFragmentArgs by navArgs()
 
     private val viewModel: SpellDetailViewModel by lazy {
         ViewModelProvider(this).get(SpellDetailViewModel::class.java)
@@ -29,7 +30,6 @@ class SpellDetailFragment : Fragment() {
         swipeRefreshLayout.isRefreshing = true
 
         binding.spellDetailScrollView.visibility = View.GONE
-        val args: SpellDetailFragmentArgs by navArgs()
 
         viewModel.onFragmentReady(args.spellIndex)
 
@@ -38,8 +38,10 @@ class SpellDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val swipeRefreshLayout = binding.spellDetailSwipeLayout
         swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onFragmentReady(args.spellIndex)
             bindData()
         }
 
