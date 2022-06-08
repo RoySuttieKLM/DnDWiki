@@ -42,7 +42,6 @@ class SpellDetailFragment : Fragment() {
         val swipeRefreshLayout = binding.spellDetailSwipeLayout
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.onFragmentReady(args.spellIndex)
-            bindData()
         }
 
         bindData()
