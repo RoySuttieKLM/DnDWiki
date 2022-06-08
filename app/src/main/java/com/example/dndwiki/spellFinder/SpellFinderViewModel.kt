@@ -1,26 +1,22 @@
 package com.example.dndwiki.spellFinder
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dndwiki.data.Spells
 import com.example.dndwiki.data.SpellsEnvelope
 import com.example.dndwiki.network.RetroFitHelper
 import com.example.dndwiki.network.SpellsAPI
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 
 class SpellFinderViewModel : ViewModel() {
 
-
-//    private val getNavigateToSpellDetail = MutableLiveData<Boolean>()
-//    val navigateToSpellDetail: LiveData<Boolean>
-//        get() = getNavigateToSpellDetail
-
-    private val _spellsList = MutableLiveData<List<Spells>>()
-    val spellsList: LiveData<List<Spells>>
-        get() = _spellsList
+    private val _spellsList = MutableStateFlow<List<Spells>>(emptyList())
+    val spellsList: StateFlow<List<Spells>> = _spellsList.asStateFlow()
 
     fun onViewReady() {
 
@@ -44,7 +40,7 @@ class SpellFinderViewModel : ViewModel() {
                 mySpell.name.contains(query, ignoreCase = true)
             }
         } else {
-            _spellsList.value = temporaryList
+            _spellsList.update { temporaryList }
         }
     }
 
