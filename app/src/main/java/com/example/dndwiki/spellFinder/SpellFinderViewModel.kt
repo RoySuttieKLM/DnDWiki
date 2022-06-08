@@ -9,6 +9,7 @@ import com.example.dndwiki.network.SpellsAPI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 
@@ -39,7 +40,7 @@ class SpellFinderViewModel : ViewModel() {
                 mySpell.name.contains(query, ignoreCase = true)
             }
         } else {
-            _spellsList.value = temporaryList
+            _spellsList.update { temporaryList }
         }
     }
 

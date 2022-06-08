@@ -11,6 +11,7 @@ import com.example.dndwiki.network.SpellsAPI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SpellDetailViewModel : ViewModel() {
@@ -36,7 +37,7 @@ class SpellDetailViewModel : ViewModel() {
             val apiSpells: SpellsAPI = RetroFitHelper.getSpellsApi()
             val spellDetails = apiSpells.getSpellDetails(index)
 
-            _spellDetails.value = spellDetails
+            _spellDetails.update { spellDetails }
         }
     }
 }
