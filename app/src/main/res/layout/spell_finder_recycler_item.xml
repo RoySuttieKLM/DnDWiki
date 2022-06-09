@@ -16,15 +16,15 @@
             android:layout_width="match_parent">
 
             <TextView
-                tools:text="Lorem Ipsum"
+                android:id="@+id/item_spell_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:gravity="center|start"
-                android:id="@+id/item_spell_name"
-                android:layout_height="@dimen/recycler_view_item_height"
-                android:layout_width="match_parent"
                 android:padding="@dimen/regular_padding"
                 android:paddingTop="@dimen/small_padding"
-                android:textSize="@dimen/regular_font_size">
+                android:textSize="@dimen/regular_font_size"
+                tools:text="Lorem Ipsum">
 
             </TextView>
         </LinearLayout>

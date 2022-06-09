@@ -2,6 +2,7 @@ package com.example.dndwiki.spellDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dndwiki.Repository.SpellRepository
 import com.example.dndwiki.data.Damage
 import com.example.dndwiki.data.DamageType
 import com.example.dndwiki.data.School
@@ -15,6 +16,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SpellDetailViewModel : ViewModel() {
+
+    private var repository = SpellRepository()
 
     private val initSpellDetails = SpellDetails(" ",
         " ",
@@ -34,8 +37,7 @@ class SpellDetailViewModel : ViewModel() {
     fun onFragmentReady(index: String) {
 
         viewModelScope.launch {
-            val apiSpells: SpellsAPI = RetroFitHelper.getSpellsApi()
-            val spellDetails = apiSpells.getSpellDetails(index)
+            val spellDetails = repository.fetchSpellDetails(index)
 
             _spellDetails.update { spellDetails }
         }

@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 class SpellDetailFragment : Fragment() {
 
     private lateinit var binding: SpellDetailFragmentBinding
-    val args: SpellDetailFragmentArgs by navArgs()
+    private val args: SpellDetailFragmentArgs by navArgs()
 
     private val viewModel: SpellDetailViewModel by lazy {
         ViewModelProvider(this).get(SpellDetailViewModel::class.java)
@@ -29,13 +29,12 @@ class SpellDetailFragment : Fragment() {
         binding = SpellDetailFragmentBinding.inflate(inflater)
 
         val swipeRefreshLayout = binding.spellDetailSwipeLayout
-        swipeRefreshLayout.isRefreshing = true
 
         binding.spellDetailScrollView.visibility = View.GONE
 
         viewModel.onFragmentReady(args.spellIndex)
 
-        swipeRefreshLayout.isRefreshing = false
+        swipeRefreshLayout.isRefreshing = true
 
         return binding.root
     }
@@ -46,8 +45,6 @@ class SpellDetailFragment : Fragment() {
         val swipeRefreshLayout = binding.spellDetailSwipeLayout
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.onFragmentReady(args.spellIndex)
-
-            swipeRefreshLayout.isRefreshing = false
         }
 
         bindData()
@@ -55,10 +52,10 @@ class SpellDetailFragment : Fragment() {
 
     private fun bindData(){
         val swipeRefreshLayout = binding.spellDetailSwipeLayout
+
         lifecycleScope.launchWhenStarted {
             viewModel.spellDetails.collectLatest { spellDetails ->
                 binding.spellNameTextView.text = spellDetails.name
-
                 binding.levelTextView.text = spellDetails.level.toString()
                 binding.durationTextView.text = spellDetails.duration.orEmpty()
                 binding.castingTimeTextView.text = spellDetails.casting_time.orEmpty()
