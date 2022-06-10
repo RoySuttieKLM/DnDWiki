@@ -61,10 +61,10 @@ class SpellFinderFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenStarted {
-            viewModel.spellsList.collectLatest { spells ->
-                myAdapter.setSpells(spells)
+            viewModel.uiState.collectLatest { state ->
+                myAdapter.setSpells(state.spells)
 
-                swipeRefreshLayout.isRefreshing = false
+                swipeRefreshLayout.isRefreshing = state.isRefreshing
             }
         }
 

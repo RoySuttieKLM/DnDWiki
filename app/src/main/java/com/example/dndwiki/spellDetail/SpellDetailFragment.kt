@@ -54,22 +54,22 @@ class SpellDetailFragment : Fragment() {
         val swipeRefreshLayout = binding.spellDetailSwipeLayout
 
         lifecycleScope.launchWhenStarted {
-            viewModel.spellDetails.collectLatest { spellDetails ->
-                binding.spellNameTextView.text = spellDetails.name
-                binding.levelTextView.text = spellDetails.level.toString()
-                binding.durationTextView.text = spellDetails.duration.orEmpty()
-                binding.castingTimeTextView.text = spellDetails.casting_time.orEmpty()
-                if (spellDetails.damage?.damage_type?.name != null) {
-                    binding.damageTypeTextView.text = spellDetails.damage.damage_type.name.orEmpty()
+            viewModel.uiState.collectLatest {  spellDetails ->
+                binding.spellNameTextView.text = spellDetails.spellDetails.name
+                binding.levelTextView.text = spellDetails.spellDetails.level.toString()
+                binding.durationTextView.text = spellDetails.spellDetails.duration.orEmpty()
+                binding.castingTimeTextView.text = spellDetails.spellDetails.casting_time.orEmpty()
+                if (spellDetails.spellDetails.damage?.damage_type?.name != null) {
+                    binding.damageTypeTextView.text = spellDetails.spellDetails.damage.damage_type.name.orEmpty()
                 } else {
                     binding.damageTypeTextView.text = getString(R.string.none)
                 }
-                binding.schoolTextView.text = spellDetails.school?.name.orEmpty()
-                if (spellDetails.classes.isNotEmpty()) {
-                    binding.dndClasseTextView.text = spellDetails.classes[0].name.orEmpty()
+                binding.schoolTextView.text = spellDetails.spellDetails.school?.name.orEmpty()
+                if (spellDetails.spellDetails.classes.isNotEmpty()) {
+                    binding.dndClasseTextView.text = spellDetails.spellDetails.classes[0].name.orEmpty()
                 }
-                if (spellDetails.desc.isNotEmpty()) {
-                    binding.descriptionTextView.text = spellDetails.desc[0]
+                if (spellDetails.spellDetails.desc.isNotEmpty()) {
+                    binding.descriptionTextView.text = spellDetails.spellDetails.desc[0]
                 }
                 swipeRefreshLayout.isRefreshing = false
                 binding.spellDetailScrollView.visibility = View.VISIBLE
