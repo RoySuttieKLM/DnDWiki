@@ -3,7 +3,6 @@ package com.example.dndwiki.spellFinder
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dndwiki.data.Spells
-import com.example.dndwiki.data.SpellsEnvelope
 import com.example.dndwiki.repository.SpellRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,8 +33,7 @@ class SpellFinderViewModel : ViewModel() {
 
             _uiState.update { it.copy(isRefreshing = true) }
 
-            val envelope: SpellsEnvelope = repository.getSpells()
-            val spells = envelope.spells
+            val spells = repository.getSpells()
             temporaryList = spells
             _uiState.update {
                 it.copy(
@@ -49,9 +47,10 @@ class SpellFinderViewModel : ViewModel() {
     fun onSearchQueryInput(query: String?) {
 
         if (!query.isNullOrEmpty()) {
-            _uiState.update{
+            _uiState.update {
                 it.copy(spells = temporaryList.filter { mySpell ->
-                    mySpell.name.contains(query, ignoreCase = true)})
+                    mySpell.name.contains(query, ignoreCase = true)
+                })
             }
         } else {
             _uiState.update {

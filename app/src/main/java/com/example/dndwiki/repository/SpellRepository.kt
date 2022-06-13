@@ -1,24 +1,19 @@
 package com.example.dndwiki.repository
 
 import com.example.dndwiki.data.SpellDetails
-import com.example.dndwiki.data.SpellsEnvelope
-import com.example.dndwiki.network.RetroFitHelper
-import kotlinx.coroutines.flow.callbackFlow
+import com.example.dndwiki.data.Spells
+import com.example.dndwiki.network.ApiSource
 
-class SpellRepository: DataSource {
+class SpellRepository {
 
-    private val spellsAPI = RetroFitHelper.getSpellsApi()
+    private val api: DataSource = ApiSource()
 
-    private var spells = SpellsEnvelope()
-    private var spellDetails = SpellDetails()
 
-    override suspend fun getSpells(): SpellsEnvelope {
-        spells = spellsAPI.getSpells()
-        return spells
+    suspend fun getSpells(): List<Spells> {
+        return api.getSpells().spells
     }
 
-    override suspend fun getSpellDetails(index: String): SpellDetails {
-        spellDetails = spellsAPI.getSpellDetails(index)
-        return spellDetails
+    suspend fun getSpellDetails(index: String): SpellDetails {
+        return api.getSpellDetails(index)
     }
 }
