@@ -11,7 +11,20 @@ data class SpellDetails(
     val damage: Damage? = null,
     val school: School? = null,
     val classes: List<Classes> = emptyList(),
-)
+) {
+    constructor() : this(
+        " ",
+        " ",
+        0,
+        " ",
+        emptyList(),
+        " ",
+        " ",
+        Damage(DamageType()),
+        School(),
+        emptyList(),
+    )
+}
 
 data class Damage(
     val damage_type: DamageType,

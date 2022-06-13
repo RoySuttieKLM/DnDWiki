@@ -2,9 +2,9 @@ package com.example.dndwiki.spellFinder
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dndwiki.Repository.SpellRepository
 import com.example.dndwiki.data.Spells
 import com.example.dndwiki.data.SpellsEnvelope
+import com.example.dndwiki.repository.SpellRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class SpellFinderViewModel : ViewModel() {
 
-    private var repository = SpellRepository()
+    private val repository = SpellRepository()
 
     data class UiState(
         val isRefreshing: Boolean,
@@ -34,7 +34,7 @@ class SpellFinderViewModel : ViewModel() {
 
             _uiState.update { it.copy(isRefreshing = true) }
 
-            val envelope: SpellsEnvelope = repository.fetchSpells()
+            val envelope: SpellsEnvelope = repository.getSpells()
             val spells = envelope.spells
             temporaryList = spells
             _uiState.update {

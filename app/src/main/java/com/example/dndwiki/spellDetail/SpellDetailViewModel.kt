@@ -2,14 +2,11 @@ package com.example.dndwiki.spellDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dndwiki.Repository.SpellRepository
 import com.example.dndwiki.data.Damage
 import com.example.dndwiki.data.DamageType
 import com.example.dndwiki.data.School
 import com.example.dndwiki.data.SpellDetails
-import com.example.dndwiki.network.RetroFitHelper
-import com.example.dndwiki.network.SpellsAPI
-import com.example.dndwiki.spellFinder.SpellFinderViewModel
+import com.example.dndwiki.repository.SpellRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class SpellDetailViewModel : ViewModel() {
 
-    private var repository = SpellRepository()
+    private val repository = SpellRepository()
 
     data class UiState(
         val isRefreshing: Boolean,
@@ -27,17 +24,7 @@ class SpellDetailViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState(
         isRefreshing = false,
-        spellDetails = SpellDetails(" ",
-            " ",
-            0,
-            " ",
-            emptyList(),
-            " ",
-            " ",
-            Damage(DamageType()),
-            School(),
-            emptyList()
-    )))
+        spellDetails = SpellDetails()))
 
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
@@ -46,7 +33,7 @@ class SpellDetailViewModel : ViewModel() {
         _uiState.update { it.copy(isRefreshing = true) }
 
         viewModelScope.launch {
-            val spellDetails = repository.fetchSpellDetails(index)
+            val spellDetails = repository.getSpellDetails(index)
 
             _uiState.update {
                 it.copy(
