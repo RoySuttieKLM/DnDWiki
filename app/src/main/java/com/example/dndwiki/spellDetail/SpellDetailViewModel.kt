@@ -6,6 +6,7 @@ import com.example.dndwiki.data.Damage
 import com.example.dndwiki.data.DamageType
 import com.example.dndwiki.data.School
 import com.example.dndwiki.data.SpellDetails
+import com.example.dndwiki.diModule.DIModule
 import com.example.dndwiki.repository.SpellRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,9 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class SpellDetailViewModel : ViewModel() {
-
-    private val repository = SpellRepository()
+class SpellDetailViewModel(
+    private val repository: SpellRepository = DIModule.provideRepository()
+) : ViewModel() {
 
     data class UiState(
         val isRefreshing: Boolean,

@@ -17,9 +17,7 @@ class SpellDetailFragment : Fragment() {
     private lateinit var binding: SpellDetailFragmentBinding
     private val args: SpellDetailFragmentArgs by navArgs()
 
-    private val viewModel: SpellDetailViewModel by lazy {
-        ViewModelProvider(this).get(SpellDetailViewModel::class.java)
-    }
+    private val viewModel: SpellDetailViewModel = SpellDetailViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

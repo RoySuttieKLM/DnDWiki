@@ -23,9 +23,7 @@ class SpellFinderFragment : Fragment() {
 
     private lateinit var binding: SpellFinderFragmentBinding
 
-    private val viewModel: SpellFinderViewModel by lazy {
-        ViewModelProvider(this).get(SpellFinderViewModel::class.java)
-    }
+    private val viewModel: SpellFinderViewModel = SpellFinderViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

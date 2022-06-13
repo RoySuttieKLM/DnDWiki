@@ -11,15 +11,13 @@ import com.example.dndwiki.R
 
 class HomeFragment : Fragment() {
 
-    private lateinit var viewModel: HomeViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         val binding = com.example.dndwiki.databinding.HomeFragmentBinding.inflate(inflater)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        val viewModel = HomeViewModel()
 
         viewModel.navigateToSpellFinder.observe(viewLifecycleOwner
         ) { shouldNavigate ->
