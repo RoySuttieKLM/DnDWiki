@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dndwiki.R
 import com.example.dndwiki.data.Spells
@@ -13,13 +14,6 @@ class RecyclerAdapter(
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     private var data: List<Spells> = emptyList()
-
-    fun setSpells(list: List<Spells>) {
-
-        data = list
-
-        notifyDataSetChanged()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
@@ -48,5 +42,10 @@ class RecyclerAdapter(
         }
     }
 
-
+    fun setData(list: List<Spells>) {
+        val diffUtil = RecyclerViewDiffUtil(data, list)
+        val diffResults = DiffUtil.calculateDiff(diffUtil)
+        data = list
+        diffResults.dispatchUpdatesTo(this)
+    }
 }
