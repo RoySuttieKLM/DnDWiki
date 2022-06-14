@@ -3,7 +3,6 @@ package com.example.dndwiki.spellFinder
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dndwiki.data.Spells
-import com.example.dndwiki.diModule.DIModule
 import com.example.dndwiki.repository.SpellRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +12,7 @@ import kotlinx.coroutines.launch
 
 
 class SpellFinderViewModel(
-    private val repository: SpellRepository = DIModule.provideRepository()
+    private val repository: SpellRepository,
 ) : ViewModel() {
 
     data class UiState(

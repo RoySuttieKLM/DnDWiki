@@ -2,11 +2,7 @@ package com.example.dndwiki.spellDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dndwiki.data.Damage
-import com.example.dndwiki.data.DamageType
-import com.example.dndwiki.data.School
 import com.example.dndwiki.data.SpellDetails
-import com.example.dndwiki.diModule.DIModule
 import com.example.dndwiki.repository.SpellRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SpellDetailViewModel(
-    private val repository: SpellRepository = DIModule.provideRepository()
+    private val repository: SpellRepository,
 ) : ViewModel() {
 
     data class UiState(

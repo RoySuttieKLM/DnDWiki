@@ -8,6 +8,11 @@ import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dndwiki.databinding.ActivityMainBinding
+import com.example.dndwiki.diModule.DnDModule
+import com.example.dndwiki.diModule.ViewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.GlobalContext.startKoin
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +21,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        startKoin {
+            androidLogger()
+            androidContext(this@MainActivity)
+            modules(DnDModule, ViewModelModule)
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setupNavigation()
