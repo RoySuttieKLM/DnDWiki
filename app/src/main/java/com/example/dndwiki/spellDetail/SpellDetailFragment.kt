@@ -10,14 +10,14 @@ import androidx.navigation.fragment.navArgs
 import com.example.dndwiki.R
 import com.example.dndwiki.databinding.SpellDetailFragmentBinding
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SpellDetailFragment : Fragment() {
 
     private lateinit var binding: SpellDetailFragmentBinding
     private val args: SpellDetailFragmentArgs by navArgs()
 
-    private val viewModel: SpellDetailViewModel by inject()
+    private val viewModel: SpellDetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

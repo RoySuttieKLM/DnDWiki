@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dndwiki.R
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
@@ -17,7 +17,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val binding = com.example.dndwiki.databinding.HomeFragmentBinding.inflate(inflater)
-        val viewModel: HomeViewModel by inject()
+        val viewModel: HomeViewModel by viewModel()
 
         viewModel.navigateToSpellFinder.observe(viewLifecycleOwner
         ) { shouldNavigate ->

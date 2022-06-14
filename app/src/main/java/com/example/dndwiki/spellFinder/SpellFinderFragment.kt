@@ -13,7 +13,7 @@ import com.example.dndwiki.data.Spells
 import com.example.dndwiki.databinding.SpellFinderFragmentBinding
 import com.example.dndwiki.recycler_adapter.RecyclerAdapter
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SpellFinderFragment : Fragment() {
 
@@ -23,7 +23,7 @@ class SpellFinderFragment : Fragment() {
 
     private lateinit var binding: SpellFinderFragmentBinding
 
-    val viewModel: SpellFinderViewModel by inject()
+    val viewModel: SpellFinderViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
