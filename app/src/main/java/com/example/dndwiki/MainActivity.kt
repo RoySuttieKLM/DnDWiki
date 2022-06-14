@@ -21,11 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startKoin {
-            androidLogger()
-            androidContext(this@MainActivity)
-            modules(DnDModule, ViewModelModule)
-        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setupNavigation()
