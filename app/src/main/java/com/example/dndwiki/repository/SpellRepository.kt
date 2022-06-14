@@ -2,11 +2,9 @@ package com.example.dndwiki.repository
 
 import com.example.dndwiki.data.SpellDetails
 import com.example.dndwiki.data.Spells
-import com.example.dndwiki.diModule.DIModule
-import com.example.dndwiki.network.ApiSource
 
 class SpellRepository(
-    private val api: DataSource = DIModule.provideDataSource()
+    private val api: DataSource,
 ) {
 
     suspend fun getSpells(): List<Spells> {

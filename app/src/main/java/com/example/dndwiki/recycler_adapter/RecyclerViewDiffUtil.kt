@@ -5,8 +5,8 @@ import com.example.dndwiki.data.Spells
 
 class RecyclerViewDiffUtil(
     private val oldList: List<Spells>,
-    private val newList: List<Spells>
-): DiffUtil.Callback() {
+    private val newList: List<Spells>,
+) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.count()
     }
@@ -16,7 +16,7 @@ class RecyclerViewDiffUtil(
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].index ==newList[newItemPosition].index
+        return oldList[oldItemPosition].index == newList[newItemPosition].index
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

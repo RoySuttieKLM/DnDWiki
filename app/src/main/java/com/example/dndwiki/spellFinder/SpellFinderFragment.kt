@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +13,7 @@ import com.example.dndwiki.data.Spells
 import com.example.dndwiki.databinding.SpellFinderFragmentBinding
 import com.example.dndwiki.recycler_adapter.RecyclerAdapter
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SpellFinderFragment : Fragment() {
 
@@ -23,7 +23,7 @@ class SpellFinderFragment : Fragment() {
 
     private lateinit var binding: SpellFinderFragmentBinding
 
-    private val viewModel: SpellFinderViewModel = SpellFinderViewModel()
+    val viewModel: SpellFinderViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
