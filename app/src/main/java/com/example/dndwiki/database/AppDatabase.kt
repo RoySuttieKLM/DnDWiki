@@ -11,7 +11,7 @@ import com.example.dndwiki.database.spells.SpellsDao
 
 @Database(entities =
 [SpellsDB::class, SpellDetailsDB::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(TypeConverter::class)

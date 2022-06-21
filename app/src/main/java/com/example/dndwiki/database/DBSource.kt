@@ -51,13 +51,13 @@ class DBSource(
             SpellDetailsDB(
                 it.index,
                 it.name,
-                it.level!!,
-                it.duration!!,
-                it.casting_time!!,
-                it.damage!!,
-                it.school!!,
+                it.level,
+                it.duration,
+                it.casting_time,
+                it.damage,
+                it.school,
                 it.classes,
-                it.url!!,
+                it.url,
                 it.desc,
             )
         }

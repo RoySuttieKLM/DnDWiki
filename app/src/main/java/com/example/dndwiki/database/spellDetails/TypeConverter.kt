@@ -15,12 +15,12 @@ class TypeConverter(
 
 
     @TypeConverter
-    fun stringToSchool(value: String?): School? {
+    fun stringToSchool(value: String): School {
         return gson.fromJson(value, School::class.java)
     }
 
     @TypeConverter
-    fun schoolToString(school: School?): String {
+    fun schoolToString(school: School): String {
         return gson.toJson(school)
     }
 
@@ -35,24 +35,24 @@ class TypeConverter(
     }
 
     @TypeConverter
-    fun listToDesc(value: String?): List<String> {
+    fun listToDesc(value: String): List<String> {
         val itemType = object : TypeToken<List<String>>() {}.type
         return gson.fromJson(value, itemType)
     }
 
     @TypeConverter
-    fun descToList(desc: List<String>?): String? {
+    fun descToList(desc: List<String>): String {
         return gson.toJson(desc)
     }
 
     @TypeConverter
-    fun listToClasses(value: String?): List<Classes> {
+    fun listToClasses(value: String): List<Classes> {
         val itemType = object : TypeToken<List<Classes>>() {}.type
         return gson.fromJson(value, itemType)
     }
 
     @TypeConverter
-    fun classesToList(classes: List<Classes>?): String {
+    fun classesToList(classes: List<Classes>): String {
         return gson.toJson(classes)
     }
 }
