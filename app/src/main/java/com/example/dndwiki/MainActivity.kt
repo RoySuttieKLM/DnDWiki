@@ -8,11 +8,6 @@ import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dndwiki.databinding.ActivityMainBinding
-import com.example.dndwiki.diModule.DnDModule
-import com.example.dndwiki.diModule.ViewModelModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.GlobalContext.startKoin
 
 
 class MainActivity : AppCompatActivity() {
