@@ -11,7 +11,9 @@ data class SpellsEnvelope(
 data class Spells(
     val index: String,
     val name: String,
-) { constructor(): this (
-    " ",
-    " ",
-)}
+) : Serializable {
+    constructor() : this(
+        " ",
+        " ",
+    )
+}

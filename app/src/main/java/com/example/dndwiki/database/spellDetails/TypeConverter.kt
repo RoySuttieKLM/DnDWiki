@@ -9,47 +9,50 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 @ProvidedTypeConverter
-class TypeConverter {
+class TypeConverter(
+    private val gson: Gson,
+) {
+
 
     @TypeConverter
     fun stringToSchool(value: String?): School? {
-        return Gson().fromJson(value, School::class.java)
+        return gson.fromJson(value, School::class.java)
     }
 
     @TypeConverter
     fun schoolToString(school: School?): String {
-        return Gson().toJson(school)
+        return gson.toJson(school)
     }
 
     @TypeConverter
     fun stringToDamageType(value: String?): Damage? {
-        return Gson().fromJson(value, Damage::class.java)
+        return gson.fromJson(value, Damage::class.java)
     }
 
     @TypeConverter
     fun damageTypeToString(damage: Damage?): String? {
-        return Gson().toJson(damage)
+        return gson.toJson(damage)
     }
 
     @TypeConverter
     fun listToDesc(value: String?): List<String> {
         val itemType = object : TypeToken<List<String>>() {}.type
-        return Gson().fromJson(value, itemType)
+        return gson.fromJson(value, itemType)
     }
 
     @TypeConverter
     fun descToList(desc: List<String>?): String? {
-        return Gson().toJson(desc)
+        return gson.toJson(desc)
     }
 
     @TypeConverter
     fun listToClasses(value: String?): List<Classes> {
         val itemType = object : TypeToken<List<Classes>>() {}.type
-        return Gson().fromJson(value, itemType)
+        return gson.fromJson(value, itemType)
     }
 
     @TypeConverter
     fun classesToList(classes: List<Classes>?): String {
-        return Gson().toJson(classes)
+        return gson.toJson(classes)
     }
 }

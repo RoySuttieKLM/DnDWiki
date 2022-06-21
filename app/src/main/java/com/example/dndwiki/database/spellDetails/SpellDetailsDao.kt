@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface SpellDetailsDao {
 
-    @Query("SELECT * FROM spell_details_table WHERE `index` LIKE :index")
+    @Query("SELECT * FROM spell_details_table WHERE `index` = :index")
     suspend fun findByIndex(index: String): SpellDetailsDB
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

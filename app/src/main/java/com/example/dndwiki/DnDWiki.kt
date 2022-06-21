@@ -2,9 +2,9 @@ package com.example.dndwiki
 
 import android.app.Application
 import com.example.dndwiki.diModule.DnDModule
-import com.example.dndwiki.diModule.viewModelModule
 import com.example.dndwiki.diModule.databaseModule
 import com.example.dndwiki.diModule.repositoryModule
+import com.example.dndwiki.diModule.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin

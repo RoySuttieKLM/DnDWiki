@@ -10,7 +10,7 @@ import com.example.dndwiki.database.spells.SpellsDB
 import com.example.dndwiki.database.spells.SpellsDao
 
 @Database(entities =
-    [SpellsDB::class, SpellDetailsDB::class],
+[SpellsDB::class, SpellDetailsDB::class],
     version = 1,
     exportSchema = false
 )

@@ -1,6 +1,5 @@
 package com.example.dndwiki.database
 
-import com.example.dndwiki.data.School
 import com.example.dndwiki.data.SpellDetails
 import com.example.dndwiki.data.Spells
 import com.example.dndwiki.database.spellDetails.SpellDetailsDB
@@ -60,7 +59,7 @@ class DBSource(
                 it.classes,
                 it.url!!,
                 it.desc,
-                )
+            )
         }
 
         spellDetailsDao.insert(dbSpellDetails)
