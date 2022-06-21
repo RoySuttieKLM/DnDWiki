@@ -27,6 +27,8 @@ class SpellDetailViewModel(
 
     fun onFragmentReady(index: String) {
 
+        repository.isOffline(true)
+
         _uiState.update { it.copy(isRefreshing = true) }
 
         viewModelScope.launch {
@@ -37,7 +39,9 @@ class SpellDetailViewModel(
                     isRefreshing = false,
                     spellDetails = spellDetails)
             }
+
         }
+
     }
 }
 

@@ -39,5 +39,5 @@ data class School(
 )
 
 data class Classes(
-    val name: String? = null,
+    var name: String? = null,
 )

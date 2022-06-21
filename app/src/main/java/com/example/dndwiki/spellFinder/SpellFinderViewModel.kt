@@ -29,6 +29,9 @@ class SpellFinderViewModel(
     private var temporaryList: List<Spells> = emptyList()
 
     fun onDataLoading() {
+
+        repository.isOffline(true)
+
         viewModelScope.launch {
 
             _uiState.update { it.copy(isRefreshing = true) }
@@ -41,6 +44,7 @@ class SpellFinderViewModel(
                     spells = spells
                 )
             }
+            repository.saveAllSpellDetails()
         }
     }
 

@@ -11,6 +11,7 @@ import com.example.dndwiki.R
 import com.example.dndwiki.databinding.SpellDetailFragmentBinding
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class SpellDetailFragment : Fragment() {
 
@@ -53,7 +54,9 @@ class SpellDetailFragment : Fragment() {
 
         lifecycleScope.launchWhenStarted {
             viewModel.uiState.collectLatest { spellDetails ->
-                binding.spellNameTextView.text = spellDetails.spellDetails.name
+                binding.spellNameTextView.text = spellDetails.spellDetails.name.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+                }
                 binding.levelTextView.text = spellDetails.spellDetails.level.toString()
                 binding.durationTextView.text = spellDetails.spellDetails.duration.orEmpty()
                 binding.castingTimeTextView.text = spellDetails.spellDetails.casting_time.orEmpty()
