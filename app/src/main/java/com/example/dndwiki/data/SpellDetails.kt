@@ -41,5 +41,5 @@ data class School(
 )
 
 data class Classes(
-    var name: String? = null,
+    val name: String? = null,
 )
