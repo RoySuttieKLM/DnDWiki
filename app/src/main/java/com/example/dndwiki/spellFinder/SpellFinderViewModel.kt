@@ -2,7 +2,7 @@ package com.example.dndwiki.spellFinder
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dndwiki.data.Spells
+import com.example.dndwiki.data.SpellDetails
 import com.example.dndwiki.repository.SpellRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,8 +17,11 @@ class SpellFinderViewModel(
 
     data class UiState(
         val isRefreshing: Boolean,
-        val spells: List<Spells>,
+        val spells: List<SpellDetails>,
     )
+
+    //    private val _isSaving = MutableSharedFlow<Boolean>()
+    //    val isSaving = _isSaving.asSharedFlow()
 
     private val _uiState = MutableStateFlow(UiState(
         isRefreshing = false,
@@ -26,7 +29,7 @@ class SpellFinderViewModel(
     ))
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
-    private var temporaryList: List<Spells> = emptyList()
+    private var temporaryList: List<SpellDetails> = emptyList()
 
     fun onDataLoading() {
 
@@ -36,7 +39,14 @@ class SpellFinderViewModel(
 
             _uiState.update { it.copy(isRefreshing = true) }
 
-            val spells = repository.getSpells()
+
+            val spells = repository.getAllSpellDetails()
+
+            //            if (repository.isSaving) {
+            //                _isSaving.emit(true)
+            //                repository.notLoadingAnymore()
+            //            }
+
             temporaryList = spells
             _uiState.update {
                 it.copy(
@@ -44,7 +54,6 @@ class SpellFinderViewModel(
                     spells = spells
                 )
             }
-            repository.saveAllSpellDetails()
         }
     }
 

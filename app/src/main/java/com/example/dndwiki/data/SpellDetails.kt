@@ -1,7 +1,5 @@
 package com.example.dndwiki.data
 
-import java.io.Serializable
-
 data class SpellDetails(
     val index: String,
     val name: String,
@@ -23,7 +21,7 @@ data class SpellDetails(
         " ",
         " ",
         Damage(DamageType()),
-        School(),
+        School(" "),
         emptyList(),
     )
 }
@@ -37,9 +35,9 @@ data class DamageType(
 )
 
 data class School(
-    val name: String? = null,
+    val name: String,
 )
 
 data class Classes(
-    val name: String? = null,
+    val name: String,
 )

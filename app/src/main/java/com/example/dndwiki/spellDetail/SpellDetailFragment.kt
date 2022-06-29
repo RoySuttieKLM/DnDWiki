@@ -11,7 +11,6 @@ import com.example.dndwiki.R
 import com.example.dndwiki.databinding.SpellDetailFragmentBinding
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class SpellDetailFragment : Fragment() {
 
@@ -54,22 +53,20 @@ class SpellDetailFragment : Fragment() {
 
         lifecycleScope.launchWhenStarted {
             viewModel.uiState.collectLatest { spellDetails ->
-                binding.spellNameTextView.text = spellDetails.spellDetails.name.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-                }
+                binding.spellNameTextView.text = spellDetails.spellDetails.name
                 binding.levelTextView.text = spellDetails.spellDetails.level.toString()
-                binding.durationTextView.text = spellDetails.spellDetails.duration.orEmpty()
-                binding.castingTimeTextView.text = spellDetails.spellDetails.casting_time.orEmpty()
+                binding.durationTextView.text = spellDetails.spellDetails.duration
+                binding.castingTimeTextView.text = spellDetails.spellDetails.casting_time
                 if (spellDetails.spellDetails.damage?.damage_type?.name != null) {
                     binding.damageTypeTextView.text =
                         spellDetails.spellDetails.damage.damage_type.name.orEmpty()
                 } else {
                     binding.damageTypeTextView.text = getString(R.string.none)
                 }
-                binding.schoolTextView.text = spellDetails.spellDetails.school?.name.orEmpty()
+                binding.schoolTextView.text = spellDetails.spellDetails.school.name
                 if (spellDetails.spellDetails.classes.isNotEmpty()) {
                     binding.dndClasseTextView.text =
-                        spellDetails.spellDetails.classes[0].name.orEmpty()
+                        spellDetails.spellDetails.classes[0].name
                 }
                 if (spellDetails.spellDetails.desc.isNotEmpty()) {
                     binding.descriptionTextView.text = spellDetails.spellDetails.desc[0]

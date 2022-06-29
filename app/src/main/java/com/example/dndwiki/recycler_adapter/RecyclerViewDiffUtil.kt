@@ -1,11 +1,11 @@
 package com.example.dndwiki.recycler_adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.dndwiki.data.Spells
+import com.example.dndwiki.data.SpellDetails
 
 class RecyclerViewDiffUtil(
-    private val oldList: List<Spells>,
-    private val newList: List<Spells>,
+    private val oldList: List<SpellDetails>,
+    private val newList: List<SpellDetails>,
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.count()

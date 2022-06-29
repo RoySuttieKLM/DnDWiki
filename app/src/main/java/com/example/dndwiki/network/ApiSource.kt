@@ -6,7 +6,7 @@ import com.example.dndwiki.repository.DataSource
 
 class ApiSource : DataSource {
 
-    override suspend fun getSpells(): List<Spells> {
+    suspend fun getSpells(): List<Spells> {
         return RetroFitHelper.getSpellsApi().getSpells().spells
     }
 

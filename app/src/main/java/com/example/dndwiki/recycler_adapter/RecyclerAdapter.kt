@@ -7,13 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dndwiki.R
-import com.example.dndwiki.data.Spells
+import com.example.dndwiki.data.SpellDetails
 
 class RecyclerAdapter(
-    val onClick: (spell: Spells) -> Unit,
+    val onClick: (spell: SpellDetails) -> Unit,
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    private var data: List<Spells> = emptyList()
+    private var data: List<SpellDetails> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
@@ -28,21 +28,21 @@ class RecyclerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, i: Int) {
         holder.bind(data[i])
-
-        holder.itemView.setOnClickListener {
-            onClick(data[i])
-        }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val itemSpellName: TextView = itemView.findViewById(R.id.item_spell_name)
 
-        fun bind(spell: Spells) {
+        fun bind(spell: SpellDetails) {
             itemSpellName.text = spell.name
+
+            itemView.setOnClickListener {
+                onClick(spell)
+            }
         }
     }
 
-    fun setData(list: List<Spells>) {
+    fun setData(list: List<SpellDetails>) {
         val diffUtil = RecyclerViewDiffUtil(data, list)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         data = list
