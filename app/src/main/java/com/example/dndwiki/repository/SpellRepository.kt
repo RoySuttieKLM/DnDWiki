@@ -14,7 +14,7 @@ class SpellRepository(
     //    var isSaving = false
 
     suspend fun getAllSpellDetails(): List<SpellDetails> {
-        if (!isAlreadySavedToday()) {
+        if (!hasBeenSavedInTheLast24Hours()) {
             //            isSaving = true
             saveAllSpellDetails()
         }
@@ -44,17 +44,17 @@ class SpellRepository(
         }
     }
 
-    private fun isAlreadySavedToday(): Boolean {
+    private fun hasBeenSavedInTheLast24Hours(): Boolean {
         val currentTime = System.currentTimeMillis()
+        val oneDayInMillis: Long = 86400000
 
         preferences.getLastSaveDate().apply {
             if (this == 0L) {
-                preferences.saveDate(currentTime)
+                preferences.saveDateTime(currentTime)
                 return false
             } else if (this > 0L) {
-                // 86400000 milliseconds = 24 hours
-                if ((this - currentTime) > 86400000) {
-                    preferences.saveDate(currentTime)
+                if ((this - currentTime) > oneDayInMillis) {
+                    preferences.saveDateTime(currentTime)
                     return false
                 }
             }
