@@ -46,13 +46,14 @@ class SpellRepository(
 
     private fun hasBeenSavedInTheLast24Hours(): Boolean {
         val currentTime = System.currentTimeMillis()
-        val oneDayInMillis: Long = 86400000
+        val oneDayInMillis = 86400000L
+        val defaultValue = 0L
 
         preferences.getLastSaveDate().apply {
-            if (this == 0L) {
+            if (this == defaultValue) {
                 preferences.saveDateTime(currentTime)
                 return false
-            } else if (this > 0L) {
+            } else if (this > defaultValue) {
                 if ((this - currentTime) > oneDayInMillis) {
                     preferences.saveDateTime(currentTime)
                     return false
