@@ -8,18 +8,14 @@ class Preferences(context: Context) {
     private val preferences: SharedPreferences = context.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = preferences.edit()
 
-    fun saveData(saveDate: Long) {
+    fun saveDate(saveDate: Long) {
 
         editor.apply {
-            putLong("LONG_KEY", saveDate)
+            putLong("LAST_SAVE", saveDate)
         }.apply()
     }
 
-    fun getData(): Long {
-        return preferences.getLong("LONG_KEY", 0L)
-    }
-
-    fun clearData() {
-        editor.clear()
+    fun getLastSaveDate(): Long {
+        return preferences.getLong("LAST_SAVE", 0L)
     }
 }

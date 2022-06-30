@@ -7,7 +7,7 @@ import com.example.dndwiki.network.ApiSource
 class SpellRepository(
     private val api: ApiSource,
     private val db: DBSource,
-    private val pref: Preferences
+    private val preferences: Preferences
 ) : DataSource {
 
     private var repoStatus = true
@@ -45,27 +45,18 @@ class SpellRepository(
     }
 
     private fun isAlreadySavedToday(): Boolean {
-
-        //get current date-time
         val currentTime = System.currentTimeMillis()
 
-        //SharedPreferences -> Preferences.kt
-        //get last refresh/compare
-        pref.getData().apply {
-
+        preferences.getLastSaveDate().apply {
             if (this == 0L) {
-                pref.saveData(currentTime)
+                preferences.saveDate(currentTime)
                 return false
             } else if (this > 0L) {
-
-                //if last refresh > 24h -> update with api
+                // 86400000 milliseconds = 24 hours
                 if ((this - currentTime) > 86400000) {
-                    //save this update in SharedPreference
-                    pref.clearData()
-                    pref.saveData(currentTime)
+                    preferences.saveDate(currentTime)
                     return false
                 }
-
             }
             return true
         }
