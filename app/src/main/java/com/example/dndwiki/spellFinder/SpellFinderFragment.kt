@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dndwiki.data.Spells
+import com.example.dndwiki.data.SpellDetails
 import com.example.dndwiki.databinding.SpellFinderFragmentBinding
 import com.example.dndwiki.recycler_adapter.RecyclerAdapter
 import kotlinx.coroutines.flow.collectLatest
@@ -36,7 +37,7 @@ class SpellFinderFragment : Fragment() {
         return binding.root
     }
 
-    private fun navigateToSpellDetails(spell: Spells) {
+    private fun navigateToSpellDetails(spell: SpellDetails) {
         val navController = binding.root.findNavController()
         val action =
             SpellFinderFragmentDirections.actionSpellFinderFragmentToSpellDetailFragment(spell.index)
@@ -64,6 +65,13 @@ class SpellFinderFragment : Fragment() {
 
                 swipeRefreshLayout.isRefreshing = state.isRefreshing
             }
+//            viewModel.isSaving.collectLatest {
+//                Toast.makeText(
+//                    activity?.applicationContext,
+//                    "Data is loading, please don't shut off the app",
+//                    Toast.LENGTH_LONG
+//                ).show()
+//            }
         }
 
         binding.spellFinderSearchBar.setOnQueryTextListener(object :

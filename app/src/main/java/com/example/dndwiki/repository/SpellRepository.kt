@@ -1,28 +1,24 @@
 package com.example.dndwiki.repository
 
 import com.example.dndwiki.data.SpellDetails
-import com.example.dndwiki.data.Spells
 import com.example.dndwiki.database.DBSource
 import com.example.dndwiki.network.ApiSource
 
 class SpellRepository(
     private val api: ApiSource,
     private val db: DBSource,
+    private val preferences: Preferences
 ) : DataSource {
 
-    private var alreadyExecuted: Boolean = false
     private var repoStatus = true
+    //    var isSaving = false
 
-    override suspend fun getSpells(): List<Spells> {
-        var spells: List<Spells>
-        spells = api.getSpells()
-        db.saveSpells(spells)
-        if (repoStatus) {
-            return spells
-        } else {
-            spells = db.getSpells()
+    suspend fun getAllSpellDetails(): List<SpellDetails> {
+        if (!hasBeenSavedInTheLast24Hours()) {
+            //            isSaving = true
+            saveAllSpellDetails()
         }
-        return spells
+        return db.getAllSpellDetails()
     }
 
     override suspend fun getSpellDetails(index: String): SpellDetails {
@@ -36,13 +32,9 @@ class SpellRepository(
         return spellDetails
     }
 
-    suspend fun saveAllSpellDetails() {
-        if (!alreadyExecuted) {
-            api.getSpells().forEach {
-                db.saveSpellDetails(api
-                    .getSpellDetails(it.index))
-            }
-            alreadyExecuted = true
+    private suspend fun saveAllSpellDetails() {
+        api.getSpells().forEach {
+            db.saveSpellDetails(api.getSpellDetails(it.index))
         }
     }
 
@@ -51,4 +43,27 @@ class SpellRepository(
             repoStatus = false
         }
     }
+
+    private fun hasBeenSavedInTheLast24Hours(): Boolean {
+        val currentTime = System.currentTimeMillis()
+        val oneDayInMillis = 86400000L
+        val defaultValue = 0L
+
+        preferences.getLastSaveDate().apply {
+            if (this == defaultValue) {
+                preferences.saveDateTime(currentTime)
+                return false
+            } else if (this > defaultValue) {
+                if ((this - currentTime) > oneDayInMillis) {
+                    preferences.saveDateTime(currentTime)
+                    return false
+                }
+            }
+            return true
+        }
+    }
+    //
+    //    fun notLoadingAnymore() {
+    //        isSaving = false
+    //    }
 }

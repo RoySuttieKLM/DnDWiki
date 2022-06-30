@@ -6,8 +6,9 @@ import com.example.dndwiki.database.AppDatabase
 import com.example.dndwiki.database.DBSource
 import com.example.dndwiki.database.spellDetails.SpellDetailsDao
 import com.example.dndwiki.database.spellDetails.TypeConverter
-import com.example.dndwiki.database.spells.SpellsDao
+//import com.example.dndwiki.database.spells.SpellsDao
 import com.example.dndwiki.network.ApiSource
+import com.example.dndwiki.repository.Preferences
 import com.example.dndwiki.repository.SpellRepository
 import com.google.gson.Gson
 import org.koin.android.ext.koin.androidApplication
@@ -16,16 +17,17 @@ import org.koin.dsl.module
 val DnDModule = module {
 
     single { ApiSource() }
-    single { DBSource(get(), get()) }
+    single { DBSource(get()) }
 
 }
 
 val repositoryModule = module {
-    fun provideRepository(api: ApiSource, dao: DBSource): SpellRepository {
-        return SpellRepository(api, dao)
+    fun provideRepository(api: ApiSource, dao: DBSource, pref: Preferences): SpellRepository {
+        return SpellRepository(api, dao, pref)
     }
 
-    single { provideRepository(get(), get()) }
+    single { Preferences(get()) }
+    single { provideRepository(get(), get(), get()) }
 }
 
 val databaseModule = module {
@@ -45,17 +47,11 @@ val databaseModule = module {
             .build()
     }
 
-    fun provideSpellsDao(database: AppDatabase): SpellsDao {
-        return database.spellsDao()
-    }
-
     fun provideSpellDetailsDao(database: AppDatabase): SpellDetailsDao {
         return database.spellDetailsDao()
     }
 
     single { provideDataBase(androidApplication()) }
-
-    single { provideSpellsDao(get()) }
 
     single { provideSpellDetailsDao(get()) }
 
