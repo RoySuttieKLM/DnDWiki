@@ -40,18 +40,21 @@ class SpellRepository(
 
     private suspend fun saveAllSpellDetails() {
         val spells = api.getSpells()
+        val spellDetails = mutableListOf<SpellDetails>()
         val duration = measureTimeMillis {
             withContext(Dispatchers.IO) {
                 spells.forEach {
                     launch {
                         Log.d("suttie", "start ${it.name}")
                         val api = async { api.getSpellDetails(it.index) }
-                        db.saveSpellDetails(api.await())
+                        spellDetails.add(api.await())
                         Log.d("suttie", "got ${it.name}")
                     }
                 }
             }
+            db.saveAllSpellDetails(spellDetails)
         }
+
         Log.d("suttie", "duration: $duration milliseconds")
     }
 

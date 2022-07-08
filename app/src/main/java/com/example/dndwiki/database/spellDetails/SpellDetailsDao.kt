@@ -12,12 +12,6 @@ interface SpellDetailsDao {
     suspend fun getAll(): List<SpellDetailsDB>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(spellDetails: SpellDetailsDB)
-
-    @Update
-    suspend fun update(spellDetails: List<SpellDetailsDB>)
-
-    @Delete
-    suspend fun delete(spellDetails: List<SpellDetailsDB>)
+    suspend fun insertAll(allSpellDetails: List<SpellDetailsDB>)
 
 }
