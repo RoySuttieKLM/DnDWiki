@@ -1,8 +1,14 @@
 package com.example.dndwiki.repository
 
+import android.util.Log
 import com.example.dndwiki.data.SpellDetails
 import com.example.dndwiki.database.DBSource
 import com.example.dndwiki.network.ApiSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.system.measureTimeMillis
 
 class SpellRepository(
     private val api: ApiSource,
@@ -14,10 +20,10 @@ class SpellRepository(
     //    var isSaving = false
 
     suspend fun getAllSpellDetails(): List<SpellDetails> {
-        if (!hasBeenSavedInTheLast24Hours()) {
-            //            isSaving = true
-            saveAllSpellDetails()
-        }
+                        if (!hasBeenSavedInTheLast24Hours()) {
+        //            isSaving = true
+        saveAllSpellDetails()
+                        }
         return db.getAllSpellDetails()
     }
 
@@ -33,10 +39,22 @@ class SpellRepository(
     }
 
     private suspend fun saveAllSpellDetails() {
-        api.getSpells().forEach {
-            db.saveSpellDetails(api.getSpellDetails(it.index))
+        val spells = api.getSpells()
+        val duration = measureTimeMillis {
+            withContext(Dispatchers.IO) {
+                spells.forEach {
+                    launch {
+                        Log.d("suttie", "start ${it.name}")
+                        val api = async { api.getSpellDetails(it.index) }
+                        db.saveSpellDetails(api.await())
+                        Log.d("suttie", "got ${it.name}")
+                    }
+                }
+            }
         }
+        Log.d("suttie", "duration: $duration milliseconds")
     }
+
 
     fun isOffline(isOffline: Boolean) {
         if (isOffline) {
