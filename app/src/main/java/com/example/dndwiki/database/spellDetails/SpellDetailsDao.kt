@@ -11,7 +11,7 @@ interface SpellDetailsDao {
     @Query("SELECT * FROM spell_details_table WHERE `index` = :index")
     suspend fun findByIndex(index: String): SpellDetailsDB
 
-    @Query("SELECT * FROM spell_details_table")
+    @Query("SELECT * FROM spell_details_table ORDER BY name ASC")
     suspend fun getAll(): List<SpellDetailsDB>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
