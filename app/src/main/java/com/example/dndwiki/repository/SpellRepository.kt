@@ -40,8 +40,7 @@ class SpellRepository(
         withContext(Dispatchers.IO) {
             spells.forEach {
                 launch {
-                    val api = async { api.getSpellDetails(it.index) }
-                    spellDetails.add(api.await())
+                    spellDetails.add(getSpellDetails(it.index))
                 }
             }
             db.saveAllSpellDetails(spellDetails)

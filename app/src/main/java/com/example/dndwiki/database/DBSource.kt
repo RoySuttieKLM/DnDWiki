@@ -28,14 +28,9 @@ class DBSource(
     }
 
     suspend fun saveAllSpellDetails(spellDetails: List<SpellDetails>) {
-        val spellDetailsDB = mutableListOf<SpellDetailsDB>()
-        withContext(Dispatchers.IO) {
-            spellDetails.forEach {
-                launch {
-                    spellDetailsDB.add(it.toSpellDetailsDB())
-                }
-            }
-            spellDetailsDao.insertAll(spellDetailsDB)
+        val spellDetailsDB = spellDetails.map {
+            it.toSpellDetailsDB()
         }
+        spellDetailsDao.insertAll(spellDetailsDB)
     }
 }
