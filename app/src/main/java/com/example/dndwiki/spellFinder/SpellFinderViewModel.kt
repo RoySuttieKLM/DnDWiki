@@ -20,9 +20,6 @@ class SpellFinderViewModel(
         val spells: List<SpellDetails>,
     )
 
-    //    private val _isSaving = MutableSharedFlow<Boolean>()
-    //    val isSaving = _isSaving.asSharedFlow()
-
     private val _uiState = MutableStateFlow(UiState(
         isRefreshing = false,
         spells = emptyList()
@@ -41,11 +38,6 @@ class SpellFinderViewModel(
 
 
             val spells = repository.getAllSpellDetails()
-
-            //            if (repository.isSaving) {
-            //                _isSaving.emit(true)
-            //                repository.notLoadingAnymore()
-            //            }
 
             temporaryList = spells
             _uiState.update {

@@ -17,13 +17,11 @@ class SpellRepository(
 ) : DataSource {
 
     private var repoStatus = true
-    //    var isSaving = false
 
     suspend fun getAllSpellDetails(): List<SpellDetails> {
-                        if (!hasBeenSavedInTheLast24Hours()) {
-        //            isSaving = true
-        saveAllSpellDetails()
-                        }
+        if (!hasBeenSavedInTheLast24Hours()) {
+            saveAllSpellDetails()
+        }
         return db.getAllSpellDetails()
     }
 
@@ -83,8 +81,4 @@ class SpellRepository(
             return true
         }
     }
-    //
-    //    fun notLoadingAnymore() {
-    //        isSaving = false
-    //    }
 }
