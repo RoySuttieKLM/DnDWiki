@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -65,13 +64,6 @@ class SpellFinderFragment : Fragment() {
 
                 swipeRefreshLayout.isRefreshing = state.isRefreshing
             }
-//            viewModel.isSaving.collectLatest {
-//                Toast.makeText(
-//                    activity?.applicationContext,
-//                    "Data is loading, please don't shut off the app",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//            }
         }
 
         binding.spellFinderSearchBar.setOnQueryTextListener(object :

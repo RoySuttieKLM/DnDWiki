@@ -1,6 +1,9 @@
 package com.example.dndwiki.database.spellDetails
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 @Dao
 interface SpellDetailsDao {
@@ -8,16 +11,10 @@ interface SpellDetailsDao {
     @Query("SELECT * FROM spell_details_table WHERE `index` = :index")
     suspend fun findByIndex(index: String): SpellDetailsDB
 
-    @Query("SELECT * FROM spell_details_table")
+    @Query("SELECT * FROM spell_details_table ORDER BY name ASC")
     suspend fun getAll(): List<SpellDetailsDB>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(spellDetails: SpellDetailsDB)
-
-    @Update
-    suspend fun update(spellDetails: List<SpellDetailsDB>)
-
-    @Delete
-    suspend fun delete(spellDetails: List<SpellDetailsDB>)
+    suspend fun insertAll(allSpellDetails: List<SpellDetailsDB>)
 
 }

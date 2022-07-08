@@ -3,6 +3,10 @@ package com.example.dndwiki.repository
 import com.example.dndwiki.data.SpellDetails
 import com.example.dndwiki.database.DBSource
 import com.example.dndwiki.network.ApiSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SpellRepository(
     private val api: ApiSource,
@@ -11,11 +15,9 @@ class SpellRepository(
 ) : DataSource {
 
     private var repoStatus = true
-    //    var isSaving = false
 
     suspend fun getAllSpellDetails(): List<SpellDetails> {
         if (!hasBeenSavedInTheLast24Hours()) {
-            //            isSaving = true
             saveAllSpellDetails()
         }
         return db.getAllSpellDetails()
@@ -33,10 +35,18 @@ class SpellRepository(
     }
 
     private suspend fun saveAllSpellDetails() {
-        api.getSpells().forEach {
-            db.saveSpellDetails(api.getSpellDetails(it.index))
+        val spells = api.getSpells()
+        val spellDetails = mutableListOf<SpellDetails>()
+        withContext(Dispatchers.IO) {
+            spells.forEach {
+                launch {
+                    spellDetails.add(getSpellDetails(it.index))
+                }
+            }
+            db.saveAllSpellDetails(spellDetails)
         }
     }
+
 
     fun isOffline(isOffline: Boolean) {
         if (isOffline) {
@@ -62,8 +72,4 @@ class SpellRepository(
             return true
         }
     }
-    //
-    //    fun notLoadingAnymore() {
-    //        isSaving = false
-    //    }
 }
