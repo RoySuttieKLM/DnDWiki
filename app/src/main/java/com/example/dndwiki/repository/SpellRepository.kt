@@ -4,7 +4,6 @@ import com.example.dndwiki.data.SpellDetails
 import com.example.dndwiki.database.DBSource
 import com.example.dndwiki.network.ApiSource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 

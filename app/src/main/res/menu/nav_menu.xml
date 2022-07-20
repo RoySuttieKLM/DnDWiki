@@ -3,6 +3,7 @@
 
     <item
         android:id="@+id/spell_finder"
-        android:title="@string/spell_finder" />
+        android:icon="@drawable/dice_svg"
+        android:title="@string/title_spell_finder_fragment" />
 
 </menu>
