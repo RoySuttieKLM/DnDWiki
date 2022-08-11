@@ -6,8 +6,11 @@
     <dimen name="large_padding">32dp</dimen>
 
     <dimen name="regular_font_size">24sp</dimen>
+    <dimen name="large_font_size">40sp</dimen>
+    <dimen name="large_font_margin">48sp</dimen>
 
     <dimen name="recycler_view_item_height">80dp</dimen>
     <dimen name="button_size">56dp</dimen>
+    <dimen name="dice_button_size">64dp</dimen>
     <dimen name="button_radius">20dp</dimen>
 </resources>

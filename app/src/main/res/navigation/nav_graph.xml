@@ -20,4 +20,9 @@
             android:name="spell_index"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/diceRollerFragment"
+        android:name="com.example.dndwiki.diceRoller.DiceRollerFragment"
+        android:label="@string/dice_roller">
+    </fragment>
 </navigation>

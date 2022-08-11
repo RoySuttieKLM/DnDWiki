@@ -15,4 +15,12 @@
     <string name="title_spell_finder_fragment">Find Spells</string>
     <string name="title_spell_detail_fragment">Details</string>
     <string name="none">none</string>
+    <string name="dice_roller">Dice Roller</string>
+    <string name="d_20">D 20</string>
+    <string name="d_100">D 100</string>
+    <string name="d_10">D 10</string>
+    <string name="d_8">D 8</string>
+    <string name="d_6">D 6</string>
+    <string name="d_12">D 12</string>
+    <string name="d_4">D 4</string>
 </resources>
