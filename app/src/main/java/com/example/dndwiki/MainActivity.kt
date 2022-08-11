@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.dndwiki.databinding.ActivityMainBinding
+import com.example.dndwiki.diceRoller.DiceRollerFragment
 import com.example.dndwiki.spellFinder.SpellFinderFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Thread.sleep
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,21 +19,32 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        loadFragment(fragment_container)
+
         bottomNav = binding.bottomNav
-        bottomNav.setOnItemReselectedListener {
+
+        bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.spellFinderFragment -> {
+                R.id.dice_roller_item -> {
+                    loadFragment(DiceRollerFragment())
+                    true
+                }
+                R.id.spell_finder_item -> {
                     loadFragment(SpellFinderFragment())
+                    true
+                }
+                else -> {
+                    false
                 }
             }
         }
     }
 
     private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, fragment)
+            addToBackStack(null)
+            sleep(100)
+            commit()
+        }
     }
 }

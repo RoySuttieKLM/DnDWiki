@@ -2,8 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/spell_finder"
+        android:id="@+id/spell_finder_item"
         android:icon="@drawable/dice_svg"
         android:title="@string/title_spell_finder_fragment" />
+
+    <item
+        android:id="@+id/dice_roller_item"
+        android:icon="@drawable/dice_svg"
+        android:title="@string/dice_roller"
+        />
 
 </menu>
